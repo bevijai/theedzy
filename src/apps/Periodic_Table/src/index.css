@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Increase overall page scale by ~20% for better readability */
+:root {
+	font-size: 120%; /* from default 16px -> ~19.2px */
+}
+
+@keyframes spark {
+	0% { transform: scale(0.7) rotate(0deg); opacity: 0; }
+	10% { opacity: 1; }
+	60% { transform: scale(1.05) rotate(10deg); opacity: 0.9; }
+	100% { transform: scale(1.2) rotate(20deg); opacity: 0; }
+}
+
+.animate-spark {
+	animation: spark 700ms ease-out forwards;
+}
+
+@keyframes click-pop {
+	0% { transform: scale(1); }
+	40% { transform: scale(1.08); }
+	100% { transform: scale(1); }
+}
+
+.animate-click-pop {
+	animation: click-pop 250ms ease-out;
+}
+
+.particle {
+	position: absolute;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	opacity: 0.9;
+	transform: translate(-50%, -50%);
+	animation: particle-move 600ms ease-out forwards;
+}
+
+@keyframes particle-move {
+	from { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+	to { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.3); opacity: 0; }
+}
+
+/* Modal entrance: fade + scale */
+@keyframes modal-in {
+	0% { opacity: 0; transform: translateY(8px) scale(0.985); }
+	60% { opacity: 1; transform: translateY(0) scale(1.01); }
+	100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-modal-in {
+	animation: modal-in 260ms cubic-bezier(.2,.9,.2,1) both;
+}
+
+/* Confetti pieces */
+@keyframes confetti-fall {
+	0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+	60% { opacity: 1; }
+	100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+}
+.confetti-piece {
+	position: absolute;
+	width: 10px;
+	height: 16px;
+	opacity: 0.95;
+	will-change: transform, opacity;
+	animation: confetti-fall 2200ms linear forwards;
+}
+
+/* badge unlock pop */
+@keyframes badge-pop {
+	0% { transform: scale(0.6) rotate(-6deg); opacity: 0; }
+	60% { transform: scale(1.12) rotate(3deg); opacity: 1; }
+	100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.badge-unlock-anim {
+	animation: badge-pop 420ms cubic-bezier(.2,.9,.2,1) both;
+}
+
+/* Certificate print layout helper */
+.certificate-container {
+	width: 820px;
+	height: 580px;
+	padding: 36px;
+	background: linear-gradient(135deg,#fff 0%, #f8fafc 100%);
+	border: 6px solid #f59e0b; /* amber border */
+	display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.certificate-title { font-size: 28px; font-weight:700; color:#0f172a; }
+.certificate-sub { color:#334155; margin-top:8px; }

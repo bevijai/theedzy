@@ -6,6 +6,7 @@ import Apps from './pages/Apps';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import AIStudyNotes from './pages/AIStudyNotes';
+import InteractivePeriodicTable from './pages/InteractivePeriodicTable';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -22,6 +23,8 @@ function App() {
         return <Apps onNavigate={setCurrentPage} />;
       case 'ai-study-notes':
         return <AIStudyNotes />;
+      case 'periodic-table':
+        return <InteractivePeriodicTable />;
       case 'about':
         return <About />;
       case 'contact':

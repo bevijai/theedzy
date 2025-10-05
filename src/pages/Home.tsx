@@ -12,8 +12,8 @@ export default function Home({ onNavigate }: HomeProps) {
       gradient: 'from-emerald-500 via-teal-500 to-cyan-500',
       icon: '🧪',
       tag: 'Science',
-      comingSoon: true,
-      link: null,
+      comingSoon: false,
+      link: 'periodic-table',
     },
     {
       name: 'Algebra Quiz',

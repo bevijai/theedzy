@@ -12,7 +12,7 @@ export default function Apps({ onNavigate }: AppsProps = {}) {
       icon: FlaskConical,
       gradient: 'from-emerald-500 via-teal-500 to-cyan-500',
       bgPattern: 'from-emerald-50 to-teal-50',
-      link: '#',
+      link: 'periodic-table',
       comingSoon: false,
       tag: 'Science',
       emoji: '🧪',
@@ -53,7 +53,7 @@ export default function Apps({ onNavigate }: AppsProps = {}) {
     }
     
     // Check if it's an internal navigation
-    if (link === 'ai-study-notes' && onNavigate) {
+    if ((link === 'ai-study-notes' || link === 'periodic-table') && onNavigate) {
       onNavigate(link);
       return;
     }
