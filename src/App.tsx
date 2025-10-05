@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Apps from './pages/Apps';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import AIStudyNotes from './pages/AIStudyNotes';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -18,7 +19,9 @@ function App() {
       case 'home':
         return <Home onNavigate={setCurrentPage} />;
       case 'apps':
-        return <Apps />;
+        return <Apps onNavigate={setCurrentPage} />;
+      case 'ai-study-notes':
+        return <AIStudyNotes />;
       case 'about':
         return <About />;
       case 'contact':

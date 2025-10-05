@@ -12,6 +12,8 @@ export default function Home({ onNavigate }: HomeProps) {
       gradient: 'from-emerald-500 via-teal-500 to-cyan-500',
       icon: '🧪',
       tag: 'Science',
+      comingSoon: true,
+      link: null,
     },
     {
       name: 'Algebra Quiz',
@@ -19,6 +21,8 @@ export default function Home({ onNavigate }: HomeProps) {
       gradient: 'from-rose-500 via-pink-500 to-fuchsia-500',
       icon: '📐',
       tag: 'Mathematics',
+      comingSoon: true,
+      link: null,
     },
     {
       name: 'AI Study Notes',
@@ -26,7 +30,8 @@ export default function Home({ onNavigate }: HomeProps) {
       gradient: 'from-violet-500 via-purple-500 to-indigo-500',
       icon: '🤖',
       tag: 'AI Powered',
-      comingSoon: true,
+      comingSoon: false,
+      link: 'ai-study-notes',
     },
   ];
 
@@ -195,7 +200,8 @@ export default function Home({ onNavigate }: HomeProps) {
             {apps.map((app, index) => (
               <div
                 key={index}
-                className="group relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 overflow-hidden"
+                className="group relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 overflow-hidden cursor-pointer"
+                onClick={() => app.link && onNavigate(app.link)}
               >
                 <div className={`h-48 bg-gradient-to-br ${app.gradient} flex items-center justify-center relative overflow-hidden`}>
                   <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
@@ -213,10 +219,15 @@ export default function Home({ onNavigate }: HomeProps) {
                   <h3 className="text-2xl font-black text-gray-900 mb-3">{app.name}</h3>
                   <p className="text-gray-600 mb-6 leading-relaxed">{app.description}</p>
 
-                  {app.comingSoon && (
+                  {app.comingSoon ? (
                     <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-sm font-bold rounded-xl shadow-lg">
                       <Sparkles className="w-4 h-4 mr-2" />
                       Coming Soon
+                    </div>
+                  ) : (
+                    <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-green-400 to-green-500 text-white text-sm font-bold rounded-xl shadow-lg">
+                      <Sparkles className="w-4 h-4 mr-2" />
+                      Available Now
                     </div>
                   )}
                 </div>

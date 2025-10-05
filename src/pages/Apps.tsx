@@ -1,6 +1,10 @@
 import { ExternalLink, FlaskConical, Calculator, Brain, Sparkles, Rocket, Zap } from 'lucide-react';
 
-export default function Apps() {
+interface AppsProps {
+  onNavigate?: (page: string) => void;
+}
+
+export default function Apps({ onNavigate }: AppsProps = {}) {
   const apps = [
     {
       name: 'Interactive Periodic Table',
@@ -30,8 +34,8 @@ export default function Apps() {
       icon: Brain,
       gradient: 'from-violet-500 via-purple-500 to-indigo-500',
       bgPattern: 'from-violet-50 to-purple-50',
-      link: '#',
-      comingSoon: true,
+      link: 'ai-study-notes',
+      comingSoon: false,
       tag: 'AI Powered',
       emoji: '🤖',
     },
@@ -47,6 +51,14 @@ export default function Apps() {
     if (comingSoon) {
       return;
     }
+    
+    // Check if it's an internal navigation
+    if (link === 'ai-study-notes' && onNavigate) {
+      onNavigate(link);
+      return;
+    }
+    
+    // External link
     window.open(link, '_blank');
   };
 
