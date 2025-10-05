@@ -14,12 +14,30 @@ interface PeriodicTableBreadcrumbProps {
 
 export default function PeriodicTableBreadcrumb({ onNavigateHome, onNavigateApps }: PeriodicTableBreadcrumbProps) {
   useEffect(() => {
-    // Add custom CSS to hide the periodic table's navigation
+    // Add custom CSS to hide only Sam's ChemLab branding, keep navigation buttons
     const style = document.createElement('style');
     style.textContent = `
-      #periodic-table-root nav,
-      #periodic-table-root header {
+      /* Hide only the left side with Sam's ChemLab logo and title */
+      #periodic-table-root header .flex.items-center.mr-6 {
         display: none !important;
+      }
+      
+      /* Alternatively, hide the entire header and show only nav buttons */
+      #periodic-table-root header {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      
+      /* Style the navigation buttons to integrate better */
+      #periodic-table-root nav {
+        background: rgba(255, 255, 255, 0.9) !important;
+        backdrop-filter: blur(10px) !important;
+        padding: 0.75rem !important;
+        border-radius: 1rem !important;
+        margin: 1rem auto !important;
+        width: fit-content !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
       }
     `;
     document.head.appendChild(style);
