@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build-and-deploy": "npm run build && npm run git-update",
+    "git-update": "git add . && git commit -m \"Auto-update: %date% %time%\" && git push",
     "lint": "eslint .",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.app.json"
