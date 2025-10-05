@@ -1,10 +1,21 @@
 import { ArrowRight, Sparkles, Target, Eye, Heart, Zap, Star, TrendingUp } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import '../performance.css';
 
 interface HomeProps {
   onNavigate: (page: string) => void;
 }
 
 export default function Home({ onNavigate }: HomeProps) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    // Preload the background image for better performance
+    const img = new Image();
+    img.onload = () => setImageLoaded(true);
+    img.src = 'https://images.pexels.com/photos/5212703/pexels-photo-5212703.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1';
+  }, []);
+
   const apps = [
     {
       name: 'Interactive Periodic Table',
@@ -51,12 +62,26 @@ export default function Home({ onNavigate }: HomeProps) {
   return (
     <div className="min-h-screen">
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+        {/* Loading state while image loads */}
+        {!imageLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-violet-600 via-blue-600 to-cyan-600">
+            <div className="text-center text-white">
+              <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center mx-auto mb-4 animate-pulse">
+                <Sparkles className="w-8 h-8" />
+              </div>
+              <p className="text-lg font-semibold">Loading TheEdzy...</p>
+            </div>
+          </div>
+        )}
         <div
-          className="absolute inset-0 hero-bg-responsive bg-no-repeat"
+          className={`absolute inset-0 hero-bg-optimized bg-no-repeat transition-opacity duration-1000 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
           style={{
-            backgroundImage: 'url(https://images.pexels.com/photos/5212703/pexels-photo-5212703.jpeg?auto=compress&cs=tinysrgb&w=3840&h=2160&dpr=2)',
+            backgroundImage: imageLoaded ? 'url(https://images.pexels.com/photos/5212703/pexels-photo-5212703.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1)' : 'none',
           }}
         ></div>
+        
+        {/* Fallback gradient background while image loads */}
+        <div className={`absolute inset-0 bg-gradient-to-br from-violet-600 via-blue-600 to-cyan-600 transition-opacity duration-1000 ${imageLoaded ? 'opacity-0' : 'opacity-100'}`}></div>
 
         <div className="absolute inset-0 bg-gradient-to-br from-violet-900/60 via-blue-900/50 to-cyan-900/60"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20"></div>
@@ -66,7 +91,7 @@ export default function Home({ onNavigate }: HomeProps) {
 
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="text-center animate-slide-up">
+          <div className="text-center animate-slide-up-fast">
             <div className="inline-flex items-center justify-center w-24 h-24 bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl shadow-black/40 mb-8 transform hover:scale-110 hover:rotate-3 transition-all duration-500">
               <span className="bg-gradient-to-br from-violet-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent font-black text-5xl">E</span>
             </div>

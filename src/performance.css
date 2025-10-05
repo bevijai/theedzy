@@ -1,0 +1,37 @@
+/* Optimized CSS for better performance */
+@layer utilities {
+  /* Optimize background image loading */
+  .hero-bg-optimized {
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    will-change: opacity;
+  }
+
+  /* Reduce animation complexity on mobile */
+  @media (max-width: 768px) {
+    .animate-float {
+      animation: none;
+    }
+    
+    .hero-bg-optimized {
+      background-attachment: scroll;
+    }
+  }
+
+  /* Preload critical animations only */
+  .animate-slide-up-fast {
+    animation: slideUpFast 0.4s ease-out;
+  }
+
+  @keyframes slideUpFast {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
